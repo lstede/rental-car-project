@@ -1,0 +1,16 @@
+body {
+  background-color: transparent;
+}
+
+.henk {
+  color:transparent;
+}
+
+.move-from-top {
+  top:250px;
+  position: relative;
+  .inner-cars {
+    background: #f6f6f6;
+    padding: 15px;
+  }
+}
