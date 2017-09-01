@@ -96,26 +96,103 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="inner-cars">
-                           <form method="post">
-                               <label>
-                                   <select>
-                                       <option>Blauw</option>
-                                       <option>Geel</option>
-                                       <option>Paars</option>
-                                       <option>Rood</option>
-                                       <option>Groen</option>
-                                       <option>Wit</option>
-                                       <option>Zwart</option>
-                                   </select>
-                               </label>
-                           </form>
+                            <form method="post">
+
+                                <label> Sorteer op soort
+                                    <select>
+                                        <option>Alle types</option>
+                                        <option>Minivan</option>
+                                        <option>Standaard</option>
+                                        <option>Stationwagen</option>
+                                        <option>Hatchback</option>
+                                        <option>SUV</option>
+
+                                    </select>
+                                </label>
+
+                                <label> Sorteer op kleur
+                                    <select>
+                                        <option>Blauw</option>
+                                        <option>Geel</option>
+                                        <option>Paars</option>
+                                        <option>Rood</option>
+                                        <option>Groen</option>
+                                        <option>Wit</option>
+                                        <option>Zwart</option>
+                                    </select>
+                                </label>
+
+                                <label> Sorteer op bouwjaar
+                                    <select>
+                                        <?php
+                                        for ($i = 2017; 1999 < $i; $i--) {
+                                            echo ' <option>' . $i . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </label>
+
+                                <label> Sorteer op zitplaatsen
+                                    <select>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                    </select>
+                                </label>
+
+
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="inner-cars">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at aut beatae, deleniti
-                            doloremque ducimus eum explicabo illo laudantium magnam maxime nihil non numquam officiis
-                            rem sint, suscipit voluptatibus voluptatum?
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/cars/2017-bmw-i8.png">
+                                    <i class="fa fa-users" aria-hidden="true"></i> 4
+                                </div>
+                                <div class="col-md-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto beatae
+                                    consectetur consequatur, deleniti dolorum est eveniet in laboriosam modi, nostrum,
+                                    officiis perferendis placeat possimus quibusdam saepe sint ut veniam!
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="price-wrap">
+                                        <p>€500,00 Per dag</p>
+                                        <button class="reservate">Reserveren</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="inner-cars">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/cars/2017-bmw-i8.png">
+                                    <i class="fa fa-users" aria-hidden="true"></i> 4
+                                </div>
+                                <div class="col-md-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto beatae
+                                    consectetur consequatur, deleniti dolorum est eveniet in laboriosam modi, nostrum,
+                                    officiis perferendis placeat possimus quibusdam saepe sint ut veniam!
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="price-wrap">
+                                        <p>€500,00 Per dag</p>
+                                        <button class="reservate">Reserveren</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
