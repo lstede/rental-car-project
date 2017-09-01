@@ -161,8 +161,8 @@
                                     officiis perferendis placeat possimus quibusdam saepe sint ut veniam!
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="price-wrap">
-                                        <p>€500,00 Per dag</p>
+                                    <div class="price-wrap pull-right">
+                                        <p class="price">€500,00 Per dag</p>
                                         <button class="reservate">Reserveren</button>
                                     </div>
                                 </div>
@@ -184,8 +184,8 @@
                                     officiis perferendis placeat possimus quibusdam saepe sint ut veniam!
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="price-wrap">
-                                        <p>€500,00 Per dag</p>
+                                    <div class="price-wrap pull-right">
+                                        <p class="price">€500,00 Per dag</p>
                                         <button class="reservate">Reserveren</button>
                                     </div>
                                 </div>
