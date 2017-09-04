@@ -24,7 +24,7 @@ include_once ('functions/functions.php');
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/slick.css">
-	<link rel="stylesheet" href="css/main.scss">
+	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="js/rs-plugin/css/settings.css">
 
 	<script type="text/javascript" src="js/modernizr.custom.32033.js"></script>
@@ -51,7 +51,7 @@ include_once ('functions/functions.php');
 <div class="wrapper">
 
 <section id="rent-car-form">
-
+<div class="row">
 	<div class="container col-xs-12 col-sm-12 col-md-4 auto-info">
 		Hier komt informatie over de auto
 	</div>
@@ -76,22 +76,37 @@ include_once ('functions/functions.php');
 		</div>
 
 		<div class="form-group">
-			<h6>Telefoonnummer</h6>
-			<input type="number" class="form-control" placeholder="Telefoonnummer">
-		</div>
+            <h6>Telefoonnummer</h6>
+            <input type="number" class="form-control" placeholder="Telefoonnummer">
+        </div>
+        <div class="form-group">
+            <h6>Adres</h6>
+            <input type="text" class="form-control" placeholder="Adres">
+        </div>
+        <div class="form-group col-md-3">
+            <h6>Nummer</h6>
+            <input type="number" class="form-control" placeholder="Nummer">
+        </div>
+        <div class="form-group col-md-4">
+            <h6>Postcode</h6>
+            <input type="text" class="form-control" placeholder="Postcode">
+        </div>
 
-
-		<input type="text" id="booking-from" name="booking-from" />
-		<input type="text" id="booking-to" name="booking-to" />
+        <div class="form-group date">
+            <h6>Reserveer datum</h6>
+		<input type="text" class="" id="booking-from" name="booking-from" />
+		<input type="text" class="" id="booking-to" name="booking-to" />
+    </div>
 <br>
 		<button type="submit" class="btn btn-success reserveer-btn">Reserveer</button>
 	</form>
 
 	</div>
-
+</div>
 </section>
 
 </div>
+
 
 
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -120,11 +135,7 @@ include_once ('functions/functions.php');
         numberOfMonths: 1,
         onClose: function( selectedDate ) {
 
-			/*var day1 = $("#booking-from").datepicker('getDate').getDate() + 1;
-			 var month1 = $("#booking-from").datepicker('getDate').getMonth();
-			 var year1 = $("#booking-from").datepicker('getDate').getFullYear();
-			 year1 = year1.toString().substr(2,2);
-			 var fullDate = day1 + "-" + month1 + "-" + year1;*/
+
             var minDate = $(this).datepicker('getDate');
             var newMin = new Date(minDate.setDate(minDate.getDate() + 1));
             $( "#booking-to" ).datepicker( "option", "minDate", newMin );

@@ -1,0 +1,58 @@
+body {
+  background-color: transparent; }
+
+.henk {
+  color: transparent; }
+
+.move-from-top {
+  top: 250px;
+  position: relative; }
+  .move-from-top .inner-cars {
+    background: #f6f6f6;
+    padding: 15px;
+    margin-bottom: 25px; }
+    .move-from-top .inner-cars img {
+      width: 100%; }
+  .move-from-top .price-wrap .reservate {
+    background-color: #007974;
+    display: block;
+    margin: 0;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer; }
+  .move-from-top .price-wrap .price {
+    font-weight: bold;
+    font-size: 20px;
+    color: black; }
+
+.rent-car-body {
+  background: #66cc99; }
+
+#rent-car-form {
+  background-color: #f6f6f6;
+  display: flex;
+  top: 30vh !important;
+  height: 100%;
+  padding: 10%; }
+
+.reserveer-btn {
+  margin-top: 20px;
+  background-color: #339999 !important;
+  border: none !important;
+  height: 40px; }
+
+.reserveer-btn:hover {
+  background-color: #326f6f !important;
+  border: none !important; }
+
+#rent-car-form .row {
+  width: 100%; }
+
+#rent-car-form .date {
+  display: inline-block; }
