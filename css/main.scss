@@ -1,5 +1,6 @@
 body {
   background-color: transparent;
+
 }
 
 .henk {
@@ -52,4 +53,38 @@ body {
 
   }
 
+}
+
+.rent-car-body{
+  background: #66cc99;
+}
+
+#rent-car-form{
+  background-color: #f6f6f6;
+  display: flex;
+  top: 30vh !important;
+  height: 100%;
+  padding: 10%;
+}
+
+.reserveer-btn{
+  margin-top: 20px;
+  background-color: #339999 !important;
+  border: none !important;
+  height: 40px;
+}
+.reserveer-btn:hover{
+  background-color: #326f6f !important;
+  border: none !important;
+}
+
+#rent-car-form{
+
+  .row{
+    width: 100%;
+  }
+
+  .date{
+    display: inline-block;
+  }
 }
