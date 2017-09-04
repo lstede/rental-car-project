@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+css/main.css
+fonts/fontawesome-webfont.woff2
+js/rs-plugin/.DS_Store
+js/rs-plugin/css/.DS_Store
+js/rs-plugin/js/.DS_Store
+node_modules/
