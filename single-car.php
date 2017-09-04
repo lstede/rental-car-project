@@ -1,6 +1,3 @@
-<?php
-include_once ('functions/functions.php');
-?>
 <!doctype html>
 <!--[if lt IE 7]>
 <html lang="en" class="no-js ie6"><![endif]-->
@@ -24,7 +21,7 @@ include_once ('functions/functions.php');
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/main.scss">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="js/rs-plugin/css/settings.css">
 
     <script type="text/javascript" src="js/modernizr.custom.32033.js"></script>
@@ -53,8 +50,11 @@ include_once ('functions/functions.php');
 
 <header>
 
-	<?php menu(); ?>
-</header>
+    <?php
+    include_once ('functions/functions.php');
+    menu();?>
+
+
     <!--RevSlider-->
     <div class="tp-banner-container">
         <div class="tp-banner">
@@ -173,7 +173,7 @@ include_once ('functions/functions.php');
 
 
 <div class="wrapper">
-
+    
 
     <section id="support" class="doublediagonal">
         <div class="container">

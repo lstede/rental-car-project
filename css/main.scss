@@ -45,14 +45,17 @@ body {
         background-color: #00795e;
       }
     }
-    .price {
-      font-weight: bold;
-      font-size: 20px;
-      color: black;
-    }
-
   }
+}
 
+.price {
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+#login-submit {
+  padding:0;
 }
 
 .rent-car-body{
