@@ -56,3 +56,13 @@ body {
 
 #rent-car-form .date {
   display: inline-block; }
+
+
+#rent-car-form #booking-from {
+    margin-bottom: 10px; }
+
+#registratieModal .modal-header {
+    border: none !important; }
+
+#registratieModal .modal-footer {
+    border: none !important; }

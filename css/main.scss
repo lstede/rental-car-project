@@ -70,8 +70,16 @@ body {
   .row{
     width: 100%;
   }
+#booking-from{
+  margin-bottom: 10px;
+}
+}
 
-  .date{
-    display: inline-block;
+#registratieModal{
+  .modal-header{
+    border: none !important;
+  }
+  .modal-footer{
+    border: none !important;
   }
 }

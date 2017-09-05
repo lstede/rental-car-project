@@ -242,7 +242,7 @@ include_once ('functions/functions.php');
             <div class="container">
 
                 <div class="section-heading scrollpoint sp-effect3">
-                    <h1>Auto's</h1>
+                    <h1>Merken</h1>
                     <div class="divider"></div>
                     <p>Bekijk ons volledige assortiment</p>
                 </div>

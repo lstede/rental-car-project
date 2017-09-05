@@ -80,24 +80,26 @@ include_once ('functions/functions.php');
             <input type="number" class="form-control" placeholder="Telefoonnummer">
         </div>
         <div class="form-group">
+            <h4>Adres gegevens</h4>
             <h6>Adres</h6>
             <input type="text" class="form-control" placeholder="Adres">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-6">
             <h6>Nummer</h6>
             <input type="number" class="form-control" placeholder="Nummer">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <h6>Postcode</h6>
             <input type="text" class="form-control" placeholder="Postcode">
         </div>
 
-        <div class="form-group date">
-            <h6>Reserveer datum</h6>
-		<input type="text" class="" id="booking-from" name="booking-from" />
-		<input type="text" class="" id="booking-to" name="booking-to" />
+        <div class="form-group date col-md-12">
+            <h4>Reservatie datum</h4>
+		<input type="text" class="form-control" id="booking-from" name="booking-from" />
+		<input type="text" class="form-control" id="booking-to" name="booking-to" />
+
     </div>
-<br>
+
 		<button type="submit" class="btn btn-success reserveer-btn">Reserveer</button>
 	</form>
 

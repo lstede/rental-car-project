@@ -1,6 +1,7 @@
 <?php
 
 
+
 function menu() { ?>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -10,7 +11,7 @@ function menu() { ?>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="fa fa-bars fa-lg"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="index.php">
 					<img src="img/eco/logo.png" alt="" class="logo">
 				</a>
 			</div>
