@@ -7,12 +7,19 @@ body {
 .move-from-top {
   top: 250px;
   position: relative; }
+  .move-from-top .margin-fix {
+    margin-top: -35px; }
   .move-from-top .inner-cars {
-    background: #f6f6f6;
+    background: #92d3c7;
+    border-radius: 5px;
     padding: 15px;
-    margin-bottom: 25px; }
+    color: black; }
     .move-from-top .inner-cars img {
       width: 100%; }
+  .move-from-top .car-name {
+    font-size: 25px;
+    color: white;
+    font-weight: bold; }
   .move-from-top .price-wrap .reservate {
     background-color: #007974;
     display: block;
@@ -26,10 +33,16 @@ body {
     font-weight: bold;
     line-height: 20px;
     cursor: pointer; }
-  .move-from-top .price-wrap .price {
-    font-weight: bold;
-    font-size: 20px;
-    color: black; }
+    .move-from-top .price-wrap .reservate:hover {
+      background-color: #00795e; }
+
+.price {
+  font-weight: bold;
+  font-size: 20px;
+  color: black; }
+
+#login-submit {
+  padding: 0; }
 
 .rent-car-body {
   background: #66cc99; }
