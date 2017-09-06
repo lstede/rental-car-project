@@ -1,6 +1,23 @@
 <?php
 include_once ('functions/functions.php');
-headerHtml(); ?>
+headerHtml();
+
+//jaxel.meshach@uiu.us
+//henkietankie
+
+
+/*
+
+Server: sql11.freemysqlhosting.net
+Name: sql11193140
+Username: sql11193140
+Password: chRvUVtkvF
+Port number: 3306
+
+*/
+
+
+?>
 
 <body>
 
