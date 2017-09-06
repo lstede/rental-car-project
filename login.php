@@ -13,7 +13,7 @@ headerHtml(); ?>
 
 
     <!--RevSlider-->
-    <div class="tp-banner-container">
+    <div class="tp-banner-container force-height">
         <div class="tp-banner">
             <div class="container move-from-top">
                     <div class="row">
@@ -22,7 +22,8 @@ headerHtml(); ?>
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <a href="#" class="price" id="login-form-link">Login</a>
+                                            <a href="#" class="price" id="login-form-link" onclick="login()">Login</a>
+                                            <a href="#" class="registreer-link" onclick="myFunction()" id="register-form-link">Registreer</a>
                                         </div>
                                     </div>
                                     <hr>
@@ -32,9 +33,11 @@ headerHtml(); ?>
                                         <div class="col-lg-12">
                                             <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                    Email:
+                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
                                                 </div>
                                                 <div class="form-group">
+                                                    Wachtwoord:
                                                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                                                 </div>
                                                 <div class="form-group">
@@ -48,29 +51,38 @@ headerHtml(); ?>
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="text-center">
-                                                                <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                                <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Wachtwoord vergeten?</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
+
                                             <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                    Voornaam:
+                                                    <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Voornaam" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                                    Achternaam:
+                                                    <input type="text" name="surname" id="surname" tabindex="1" class="form-control" placeholder="Achternaam" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                                    Email:
+                                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                                    Wachtwoord:
+                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    Herhaal Wachtwoord:
+                                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-sm-6 col-sm-offset-3">
-                                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registreer nu">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -89,27 +101,27 @@ headerHtml(); ?>
 </header>
 
 <script>
-    $(function() {
+    function myFunction() {
+        var y = document.getElementById('register-form');
+        var x = document.getElementById('login-form');
+        if (y.style.display === 'none') {
+            y.style.display = 'block';
+            x.style.display = 'none';
+        }
+    }
 
-        $('#login-form-link').click(function(e) {
-            $("#login-form").delay(100).fadeIn(100);
-            $("#register-form").fadeOut(100);
-            $('#register-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
-        $('#register-form-link').click(function(e) {
-            $("#register-form").delay(100).fadeIn(100);
-            $("#login-form").fadeOut(100);
-            $('#login-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
+    function login() {
 
-    });
+        var x = document.getElementById('login-form');
+        var y = document.getElementById('register-form');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+            y.style.display = 'none';
 
-
+        }
+    }
 </script>
+
 
     <?php
 footer();
