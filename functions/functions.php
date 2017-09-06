@@ -43,6 +43,7 @@ function headerHtml() {
     <?php
 }
 
+
 function menu() { ?>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -52,7 +53,7 @@ function menu() { ?>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="fa fa-bars fa-lg"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="index.php">
 					<img src="img/eco/logo.png" alt="" class="logo">
 				</a>
 			</div>
@@ -61,20 +62,18 @@ function menu() { ?>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">about</a>
+					<li><a href="index.php#about">Onze kenmerken</a>
 					</li>
-					<li><a href="#features">features</a>
-					</li>
-					<li><a href="#reviews">reviews</a>
-					</li>
-					<li><a href="#screens">screens</a>
-					</li>
-					<li><a href="#demo">demo</a>
+					<li><a href="index.php#screens">Merken</a>
 					</li>
 					<li><a class="getApp" href="rent-car.php">Producten</a>
 					</li>
-					<li><a href="#support">support</a>
+					<li><a href="index.php#support">Contact</a>
 					</li>
+                    <li><a href="vestigingen.php">Vestigingen</a>
+                    </li>
+                    <li><a href="login.php">Login</a>
+                    </li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -98,12 +97,11 @@ function footer() {
                 <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
             </div>
             <div class="rights">
-                <p>Copyright &copy; 2014</p>
-                <p>Template by <a href="http://www.scoopthemes.com" target="_blank">ScoopThemes</a></p>
+                <p>Copyright &copy; 2017</p>
+                <p>Alle rechten voorbehouden aan <a href="#" target="_blank">Rent an electric</a></p>
             </div>
         </div>
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA"></script>
 
 
     <script src="js/jquery-1.11.1.min.js"></script>
@@ -119,43 +117,7 @@ function footer() {
             appMaster.preLoader();
         });
     </script>
-    <script type="text/javascript">
-        // When the window has finished loading create our google map below
-        google.maps.event.addDomListener(window, 'load', init);
 
-        function init() {
-            // Basic options for a simple Google Map
-            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-            var mapOptions = {
-                // How zoomed in you want the map to start at (always required)
-                zoom: 11,
-
-                // The latitude and longitude to center the map (always required)
-                center: new google.maps.LatLng(51.926312, 4.517767), // Rotterdam
-                scrollwheel:  false,
-
-                // How you would like to style the map.
-                // This is where you would paste any style found on Snazzy Maps.
-                styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#88e9ad"},{"visibility":"on"}]}]
-            };
-
-            // Get the HTML DOM element that will contain your map
-            // We are using a div with id="map" seen below in the <body>
-            var mapElement = document.getElementById('map');
-
-            // Create the Google Map using our element and options defined above
-            var map = new google.maps.Map(mapElement, mapOptions);
-
-            // Let's also add a marker while we're at it
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(51.926312, 4.517767),
-                map: map,
-                title: 'Rent an electric'
-            });
-
-
-        }
-    </script>
 
     </body>
 

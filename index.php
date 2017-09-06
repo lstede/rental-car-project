@@ -242,7 +242,7 @@ include_once ('functions/functions.php');
             <div class="container">
 
                 <div class="section-heading scrollpoint sp-effect3">
-                    <h1>Auto's</h1>
+                    <h1>Merken</h1>
                     <div class="divider"></div>
                     <p>Bekijk ons volledige assortiment</p>
                 </div>
@@ -342,35 +342,10 @@ include_once ('functions/functions.php');
 
 
 
-        <footer>
-            <div class="container">
-                <a href="#" class="scrollpoint sp-effect3">
-                    <img src="img/eco/logo.png" alt="" class="logo">
-                </a>
-                <div class="social">
-                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
-                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
-                    <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
-                </div>
-                <div class="rights">
-                    <p>Copyright &copy; 2017</p>
-                    <p>Alle rechten voorbehouden <a href="http://www.scoopthemes.com" target="_blank">Rent an electric</a></p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA"></script>
-
-
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/placeholdem.min.js"></script>
-    <script src="js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
-    <script src="js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/scripts.js"></script>
+	    <?php
+	    footer();
+	    ?>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCy7hxGxNFdwtu_NDRUspMAWZ0ufT8i-u0"></script>
     <script>
         $(document).ready(function() {
             appMaster.preLoader();
@@ -385,7 +360,7 @@ include_once ('functions/functions.php');
             // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
             var mapOptions = {
                 // How zoomed in you want the map to start at (always required)
-                zoom: 11,
+                zoom: 8,
 
                 // The latitude and longitude to center the map (always required)
                 center: new google.maps.LatLng(51.926312, 4.517767), // Rotterdam
