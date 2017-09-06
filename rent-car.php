@@ -59,8 +59,10 @@ include_once ('functions/functions.php');
         </div>
 
         <div class="form-group date col-md-12">
-            <h4>Reservatie datum</h4>
+            <h4>Reserveer</h4>
+            Van:
 		<input type="text" class="form-control" id="booking-from" name="booking-from" />
+            Tot:
 		<input type="text" class="form-control" id="booking-to" name="booking-to" />
 
     </div>

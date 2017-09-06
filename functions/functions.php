@@ -66,8 +66,8 @@ function menu() { ?>
 					</li>
 					<li><a href="index.php#screens">Merken</a>
 					</li>
-					<li><a class="getApp" href="rent-car.php">Producten</a>
-					</li>
+					<!---<li><a class="getApp" href="rent-car.php">Producten</a>
+					</li>!--->
 					<li><a href="index.php#support">Contact</a>
 					</li>
                     <li><a href="vestigingen.php">Vestigingen</a>
