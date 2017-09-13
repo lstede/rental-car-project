@@ -44,7 +44,31 @@ function headerHtml() {
 }
 
 
-function menu() { ?>
+
+function paneladmin(){ ?>
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="sidebar content-box" style="display: block;">
+                    <ul class="nav">
+                        <!-- Main menu -->
+                        <li><a href="../cms/index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+                        <li><a href="../cms/accountOverzicht.php"><i class="glyphicon glyphicon-calendar"></i> Account overzicht</a></li>
+                        <li><a href="../cms/autoOverzicht.php"><i class="glyphicon glyphicon-stats"></i> Auto's overzicht</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-list"></i> Facturen overzicht</a></li>
+                        <li><a href="loguit.php?logout=true"><i class="glyphicon glyphicon-log-out"></i> Loguit</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+
+<?php }
+
+ function menu() { ?>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -126,3 +150,5 @@ function footer() {
 }
 
 ?>
+
+

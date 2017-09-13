@@ -1,10 +1,11 @@
 <?php
 require_once('loginCheck.php');
+require_once('../functions/functions.php');
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bootstrap Admin Theme v3</title>
+<head>
+    <title>Rent an electric</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -14,10 +15,10 @@ require_once('loginCheck.php');
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
   <body>
   	<div class="header">
 	     <div class="container">
@@ -37,51 +38,37 @@ require_once('loginCheck.php');
 	     </div>
 	</div>
 
-    <div class="page-content">
-    	<div class="row">
-		  <div class="col-md-2">
-		  	<div class="sidebar content-box" style="display: block;">
-                <ul class="nav">
-                    <!-- Main menu -->
-                    <li class="current"><a href="index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Account overzicht</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Auto's overzicht</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-list"></i> Facturen overzicht</a></li>
-					<li><a href="loguit.php?logout=true"><i class="glyphicon glyphicon-log-out"></i> Loguit</a></li>
-                </ul>
-             </div>
-		  </div>
-		  <div class="col-md-10">
-		  	<div class="row">
-		  		<div class="col-md-12">
-		  			<div class="content-box-large">
+    <?php paneladmin() ?>
 
-						</div>
-		  				<div class="panel-body">
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box-large">
 
-		  				</div>
-		  			</div>
-		  		</div>
+                </div>
+                <div class="panel-body">
 
-		  		<div class="col-md-12">
-		  			<div class="row">
-		  				<div class="col-md-12">
+                </div>
+            </div>
+        </div>
 
-		  				</div>
-		  			</div>
-		  			<div class="row">
-		  				<div class="col-md-12">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
 
-		  				</div>
-		  			</div>
-		  		</div>
-		  	</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
 
-
-
-		  </div>
-		</div>
-
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- deze 2 divs starten bij de functions.php NIET WEGHALEN !--->
+    </div>
+    </div>
+    <!--- deze 2 divs starten bij de functions.php NIET WEGHALEN !--->
 
     <footer>
          <div class="container">
