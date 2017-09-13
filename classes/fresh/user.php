@@ -8,8 +8,8 @@ class user extends dbExec
 
     public function login($username, $password)
     {
-        $array = array('userName', '=', $username);
-        $this->getData('users', $array);
+        $extraOptions = array("username" => $username);
+        $this->query('select','users', '', $extraOptions);
 
         if ($this->countResults < 1) {
             $this->errors[] = 'Gebruikersnaam bestaat niet';
@@ -53,12 +53,12 @@ class user extends dbExec
     }
 
     public function addUser($table,$columns) {
-        $this->insert($table,$columns);
+        $this->query('insert',$table,$columns);
     }
 
     public function getAllUsers() {
-       // $array = array('userName');
-        $this->getData('users', array());
+        $this->query('select','users');
+        return $this->results;
     }
 
 }

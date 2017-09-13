@@ -9,10 +9,9 @@ headerHtml();
 
 $user = new user();
 $user->checkLogin('cms');
-$user->getAllUsers();
 $validateRegister = new validate();
 
-$columns = array(
+/*$columns = array(
     'userPhoneNumber' => 1,
     'userEmail' => "test",
     'userFirstName' => "test",
@@ -21,7 +20,7 @@ $columns = array(
     'userPassword' => "test",
     'userAdmin' => 1);
 
-$user->query("update","users", $columns);
+$user->query("update","users", $columns);*/
 
 if (isset($_POST['register-submit'])) {
 
@@ -78,10 +77,12 @@ if (isset($_POST['register-submit'])) {
             'userAdmin' => $rights);
 
         $user->addUser('users',$columns);
+        $_POST = array();
     }
 
 
 }
+
 
 ?>
     <div class="row">
@@ -208,7 +209,8 @@ if (isset($_POST['register-submit'])) {
                             //print_r($user->results);
                             //print_r($user->results);
                             $count = 1;
-                            foreach ($user->results as $singleRowData) {
+
+                            foreach ($user->getAllUsers() as $singleRowData) {
                                 echo "<tr>";
                                 foreach ($singleRowData as $singleRow => $singleData) {
                                     echo "<td>";
@@ -336,3 +338,6 @@ if (isset($_POST['register-submit'])) {
 <?php
 
 footer();
+if(isset($_GET['edit'])) {
+    ?>   <script>alert; $('#addUserModal').modal('show');</script> <?php
+}
