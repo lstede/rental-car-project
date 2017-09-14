@@ -29,7 +29,7 @@ class uploadImg {
 			return true;
 		}
 		else{
-			echo "Geen geldig bestand probeer een ander bestand!";
+			echo "Bestand is geen afbeelding!";
 			return false;
 		}
 	}
@@ -40,6 +40,7 @@ class uploadImg {
 			return true;
 
 		}
+
 
 		else{
 			echo "Bestandsformaat te groot";
@@ -53,14 +54,15 @@ class uploadImg {
 	public function uploadfile() {
 
 		if ( move_uploaded_file( $_FILES["file"]["tmp_name"], $this->uploadfile ) ) {
-
 			return true;
-		} else {
 
+		} else {
 			return false;
 
 		}
 	}
+
+
 
 
 }

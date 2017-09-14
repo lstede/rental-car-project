@@ -139,7 +139,29 @@
 
                         </div>
 
+                        <span class="car-name">Tesla Model S</span>
+                        <div class="inner-cars">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/cars/2015-tesla-model-s-sedan-angular-front.png">
+                                    <i class="fa fa-users" aria-hidden="true"></i> 4
+                                </div>
+                                <div class="col-md-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto beatae
+                                    consectetur consequatur, deleniti dolorum est eveniet in laboriosam modi, nostrum,
+                                    officiis perferendis placeat possimus quibusdam saepe sint ut veniam!
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="price-wrap pull-right">
+                                        <p class="price">€100,00 Per dag</p>
+                                        <button class="reservate">Reserveren</button>
+                                    </div>
+                                </div>
+                            </div>
 
+
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,7 +172,67 @@
 </header>
 
 
+<div class="wrapper">
+    
 
+    <section id="support" class="doublediagonal">
+        <div class="container">
+            <div class="section-heading scrollpoint sp-effect3">
+                <h1>Support</h1>
+                <div class="divider"></div>
+                <p>For more info and support, contact us!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 scrollpoint sp-effect1">
+                            <form role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Your email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea cols="30" rows="10" class="form-control"
+                                              placeholder="Your message"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4 col-sm-4 contact-details scrollpoint sp-effect2">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-map-marker fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">4, Some street, California, USA</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-envelope fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href="mailto:support@oleose.com">support@oleose.com</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-phone fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">+1 234 567890</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container">

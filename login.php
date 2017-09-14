@@ -1,183 +1,245 @@
 <?php
-include_once ('functions/functions.php');
+session_start();
+include_once('functions/functions.php');
+include_once('classes/fresh/user.php');
+include_once('classes/fresh/input.php');
+include_once('classes/fresh/validate.php');
 headerHtml();
-require_once("cms/session.php");
-$functies = new USER();
-?>
-<body>
 
+//jaxel.meshach@uiu.us
+//henkietankie
+
+
+/*
+
+Server: sql11.freemysqlhosting.net
+Name: sql11193140
+Username: sql11193140
+Password: chRvUVtkvF
+Port number: 3306
+
+*/
+
+
+$user = new user();
+$user->checkLogin('login');
+$validateUser = new validate();
+if (isset($_POST['login-submit'])) {
+    $username = input::get('username');
+    $password = $_POST['password'];
+
+    $data = array(
+        'username' => array(
+            'required' => true,
+            'min' => '4',
+            'max' => '15'
+        ),
+        'password' => array(
+            'required' => true,
+            'min' => '2',
+            'max' => '15'
+        ));
+
+
+    if ($validateUser->validateInfo($data)) {
+        $user->login($username, $password);
+    }
+
+}
+
+
+$validateRegister = new validate();
+if (isset($_POST['register-submit'])) {
+
+
+    $data = array(
+        'usernameRegister' => array(
+            'required' => true,
+            'min' => '4',
+            'max' => '15'
+        ),
+        'phoneRegister' => array(
+            'required' => true,
+            'min' => '10',
+            'max' => '10'
+        ),
+        'emailRegister' => array(
+            'required' => true,
+            'min' => '5',
+            'max' => '254'
+        ),
+        'nameRegister' => array(
+            'required' => true,
+            'min' => '2',
+            'max' => '35'
+        ),
+        'surnameRegister' => array(
+            'required' => true,
+            'min' => '2',
+            'max' => '35'
+        ),
+        'passwordRegister' => array(
+            'required' => true,
+            'min' => '8',
+            'max' => '32',
+        ),
+        'confirm-passwordRegister' => array(
+            'required' => true,
+            'match' => 'passwordRegister'
+        ));
+
+
+    if ($validateRegister->validateInfo($data)) {
+
+        $hashPassword = $user->md5(input::get('passwordRegister'));
+        $columns = array(
+            'userPhoneNumber' => input::get('phoneRegister'),
+            'userEmail' => input::get('emailRegister'),
+            'userFirstName' => input::get('nameRegister'),
+            'userLastName'=> input::get('surnameRegister'),
+            'userName' => input::get('usernameRegister'),
+            'userPassword' => $hashPassword,
+            'userAdmin' => 0);
+
+        $user->addUser('users',$columns);
+    }
+
+
+}
+
+
+?>
+
+<body>
 
 
 <header>
 
     <?php
-    menu();?>
-
-    <?php
+    menu(); ?>
 
 
-//controleer of de sessie leeg is
-    if(empty($_SESSION['user_session'])){
-	    $_SESSION['user_session'] = "";
-    }
-    // de user id is gelijk aan de user sessie
-    $user_id = $_SESSION['user_session'];
-// als de user sessie niet leeg is selecteer de alle gebruiker gegevens
-    if (!empty($_SESSION['user_session'])) {
-
-
-	    $stmt = $functies->runQuery("SELECT * FROM users WHERE userId=:user_id");
-	    $stmt->execute(array(":user_id" => $user_id));
-
-	    $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-// zodra er io de login-submit knop geklikt is verstuurd de gebruikersnaam en wachtwoord naar de functie doLogin om te verifieren.
-    if(isset($_POST['login-submit']))
-    {
-
-
-	    $uname = strip_tags($_POST['username']);
-	    $password = strip_tags($_POST['password']);
-	    $_SESSION['username'] = strip_tags($_POST['username']);
-	    if($functies->doLogin($uname,$password))
-	    {
-
-		    header("refresh:0");
-
-	    }
-	    else
-	    {
-            echo 'wachtwoord: 123456';
-	    }
-
-    }
-    $user = new USER();
-    $table = 'users';
-
-// wanneer er op de register button wordt geklikt worden de values van de registratie doorgestuurd naar de functies en vanuit daar wordt het in de database gezet.
-
-    if(isset($_POST['register-submit']))
-    {
-	    $data= array(
-
-	    'userName' => strip_tags($_POST['username']),
-	    'userFirstName' => strip_tags($_POST['name']),
-	    'userLastName' => strip_tags($_POST['surname']),
-	    'userEmail' => strip_tags($_POST['email']),
-	    'userPhoneNumber' => strip_tags($_POST['nummer']),
-	    'userPassword' => strip_tags($_POST['password'])
-
-
-
-    );
-	    $register = false;
-	   $insert = $user->toevoegen($table,$data);
-
-	   $register = true;
-// melding is zichtbaar als er succesvol een account is aangemaakt
-       if($register = true){
-           echo 'YES';
-       }
-
-    }
-
-// als de gebruiker niet is ingelogd laat hem dan hier inloggen
-    if(!$session->is_loggedin()){
-	    exit();
-    }
-    ?>
-
-	<?php
-
-	if(empty($user_id)){ ?>
     <!--RevSlider-->
     <div class="tp-banner-container force-height">
         <div class="tp-banner">
             <div class="container move-from-top">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="panel panel-login">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <a href="#" class="price" id="login-form-link" onclick="login()">Login</a>
-                                            <a href="#" class="registreer-link" onclick="myFunction()" id="register-form-link">Registreer</a>
-                                        </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="panel panel-login">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a href="#" class="price" id="login-form-link" onclick="login()">Login</a>
+                                        <a href="#" class="registreer-link" onclick="myFunction()"
+                                           id="register-form-link">Registreer</a>
                                     </div>
-                                    <hr>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <form id="login-form"  method="post" style="display: block;">
-                                                <div class="form-group">
-                                                    Email:
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
+                                <hr>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form id="login-form" method="post" role="form" style="display: block;">
+                                            <div class="form-group">
+                                                Gebruikersnaam: <span
+                                                        style="color: red;"><?php echo $validateUser->showErrors('username') ?></span>
+                                                <input type="text" name="username" id="username" tabindex="1"
+                                                       class="form-control" placeholder="Gebruikersnaam"
+                                                       value="<?php echo input::get('username'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Wachtwoord: <span
+                                                        style="color: red;"><?php echo $validateUser->showErrors('password') ?></span>
+                                                <input type="password" name="password" id="password" tabindex="2"
+                                                       class="form-control" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-sm-offset-3">
+                                                        <input type="submit" name="login-submit" id="login-submit"
+                                                               tabindex="4" class="form-control btn btn-login"
+                                                               value="Log In">
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    Wachtwoord:
-                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-sm-6 col-sm-offset-3">
-                                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="text-center">
+                                                            <a href="https://phpoll.com/recover" tabindex="5"
+                                                               class="forgot-password">Wachtwoord vergeten?</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="text-center">
+                                            </div>
+                                        </form>
 
-                                                            </div>
-                                                        </div>
+                                        <form id="register-form"
+                                              method="post" role="form" style="display: none;">
+                                            <div class="form-group">
+                                                Voornaam: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('nameRegister') ?></span>
+                                                <input type="text" name="nameRegister" id="name" tabindex="1"
+                                                       class="form-control" placeholder="Voornaam"
+                                                       value="<?php echo input::get('nameRegister'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Achternaam: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('surnameRegister') ?></span>
+                                                <input type="text" name="surnameRegister" id="surname" tabindex="1"
+                                                       class="form-control" placeholder="Achternaam"
+                                                       value="<?php echo input::get('surnameRegister'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Email: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('emailRegister') ?></span>
+                                                <input type="email" name="emailRegister" id="email" tabindex="1"
+                                                       class="form-control" placeholder="Email"
+                                                       value="<?php echo input::get('emailRegister'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Telefoon: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('phoneRegister') ?></span>
+                                                <input type="number" name="phoneRegister" id="email" tabindex="1"
+                                                       class="form-control" placeholder="phone"
+                                                       value="<?php echo input::get('phoneRegister'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Gebruikersnaam: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('usernameRegister') ?></span>
+                                                <input type="text" name="usernameRegister" id="username" tabindex="1"
+                                                       class="form-control" placeholder="Gebruikersnaam"
+                                                       value="<?php echo input::get('usernameRegister'); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                Wachtwoord: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('passwordRegister') ?></span>
+                                                <input type="password" name="passwordRegister" id="password"
+                                                       tabindex="2"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                Herhaal Wachtwoord: <span
+                                                        style="color: red;"><?php echo $validateRegister->showErrors('confirm-passwordRegister') ?></span>
+                                                <input type="password" name="confirm-passwordRegister"
+                                                       id="confirm-password"
+                                                       tabindex="2" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-sm-offset-3">
+                                                        <input type="submit" name="register-submit" id="register-submit"
+                                                               tabindex="4" class="form-control btn btn-register"
+                                                               value="Registreer nu">
                                                     </div>
                                                 </div>
-                                            </form>
-
-                                            <form id="register-form"  method="post" role="form" style="display: none;">
-                                                <div class="form-group">
-                                                    Gebruikersnaam:
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Voornaam" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Voornaam:
-                                                    <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Voornaam" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Achternaam:
-                                                    <input type="text" name="surname" id="surname" tabindex="1" class="form-control" placeholder="Achternaam" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Email:
-                                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Telefoonnummer:
-                                                    <input type="number" name="nummer" id="nummer" tabindex="1" class="form-control" placeholder="Nummer" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Wachtwoord:
-                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    Herhaal Wachtwoord:
-                                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-sm-6 col-sm-offset-3">
-                                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registreer nu">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,17 +248,7 @@ $functies = new USER();
 
 </header>
 
-
-<?php }
-//als de gebruiker nog niet is uitgelogd stuurt hij hem direct door naar de cms pagina
-if (!empty($user_id)){
-	header("location: cms/index.php");
-
-}    ?>
-
-
 <script>
-    // als de register-form een display none heeft en er wordt op geklikt veranderd hij naar een display block
     function myFunction() {
         var y = document.getElementById('register-form');
         var x = document.getElementById('login-form');
@@ -206,8 +258,6 @@ if (!empty($user_id)){
         }
     }
 
-    // zodra er op de register-from wordt geklikt krijgt login-form een display none
-    // totdat er weer op de login-form wordt geklikt dan krijgt hij een display block
     function login() {
 
         var x = document.getElementById('login-form');
@@ -221,7 +271,7 @@ if (!empty($user_id)){
 </script>
 
 
-    <?php
+<?php
 footer();
 ?>
 

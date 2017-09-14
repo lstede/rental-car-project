@@ -22,11 +22,45 @@ include_once ('functions/functions.php');
 
 	<div class="container col-xs-12 col-sm-12 col-md-7 bestuurder-info">
 	<form>
+	<div class="form-group col-md-12">
+		<h4>Naam Bestuurder</h4>
+		<h6>Voornaam</h6>
+		<input type="text" class="form-control" placeholder="Voornaam">
+	</div>
+
+		<div class="form-group col-md-12">
+			<h6>Achternaam</h6>
+			<input type="text" class="form-control" placeholder="Achternaam">
+		</div>
+
+		<div class="form-group col-md-12">
+			<h4>Contact gegevens</h4>
+			<h6>Email</h6>
+			<input type="email" class="form-control" placeholder="Email">
+		</div>
+
+		<div class="form-group col-md-12">
+            <h6>Telefoonnummer</h6>
+            <input type="number" class="form-control" placeholder="Telefoonnummer">
+        </div>
+        <div class="form-group col-md-12">
+            <h4>Adres gegevens</h4>
+            <h6>Adres</h6>
+            <input type="text" class="form-control" placeholder="Adres">
+        </div>
+
+        <div class="form-group col-md-6">
+            <h6>Nummer</h6>
+            <input type="number" class="form-control" placeholder="Nummer">
+        </div>
+        <div class="form-group col-md-6">
+            <h6>Postcode</h6>
+            <input type="text" class="form-control" placeholder="Postcode">
+        </div>
+
         <div class="form-group date col-md-12">
-            <h4>Reserveer</h4>
-            Van:
+            <h4>Reservatie datum</h4>
 		<input type="text" class="form-control" id="booking-from" name="booking-from" />
-            Tot:
 		<input type="text" class="form-control" id="booking-to" name="booking-to" />
 
     </div>

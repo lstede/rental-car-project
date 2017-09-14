@@ -44,31 +44,7 @@ function headerHtml() {
 }
 
 
-
-function paneladmin(){ ?>
-
-    <div class="page-content">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="sidebar content-box" style="display: block;">
-                    <ul class="nav">
-                        <!-- Main menu -->
-                        <li><a href="../cms/index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-                        <li><a href="../cms/accountOverzicht.php"><i class="glyphicon glyphicon-calendar"></i> Account overzicht</a></li>
-                        <li><a href="../cms/autoOverzicht.php"><i class="glyphicon glyphicon-stats"></i> Auto's overzicht</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-list"></i> Facturen overzicht</a></li>
-                        <li><a href="loguit.php?logout=true"><i class="glyphicon glyphicon-log-out"></i> Loguit</a></li>
-                    </ul>
-                </div>
-            </div>
-
-
-
-
-
-<?php }
-
- function menu() { ?>
+function menu() { ?>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -90,8 +66,8 @@ function paneladmin(){ ?>
 					</li>
 					<li><a href="index.php#screens">Merken</a>
 					</li>
-					<!---<li><a class="getApp" href="rent-car.php">Producten</a>
-					</li>!--->
+					<li><a class="getApp" href="rent-car.php">Producten</a>
+					</li>
 					<li><a href="index.php#support">Contact</a>
 					</li>
                     <li><a href="vestigingen.php">Vestigingen</a>
@@ -131,7 +107,7 @@ function footer() {
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/slick.min.js"></script>
-    <script src="js/placeholdem.min.js"></script>
+    <!--<script src="js/placeholdem.min.js"></script>-->
     <script src="js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
     <script src="js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="js/waypoints.min.js"></script>
@@ -150,5 +126,3 @@ function footer() {
 }
 
 ?>
-
-
