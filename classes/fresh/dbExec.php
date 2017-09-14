@@ -68,23 +68,39 @@ class dbExec extends dbConn
                     }
                 }
                 if (!empty($extraOptions)) {
-                    $sql .= "WHERE ";
-                    $sql .= $option . ":{$option}";
+                    $sql .= " WHERE ";
+                    $arrayKeys = array_keys($extraOptions);
+                    foreach ($extraOptions as $option => $value) {
+                        if ($option != end($arrayKeys)) {
+                            $sql .= $option . " = :{$option} AND ";
+                        } else {
+                            $sql .= $option . " = :{$option}";
+                        }
+
+                    }
                 }
                 break;
 
             case('delete'):
                 $sql = "DELETE FROM {$table}";
-                $arrayKeys = array_keys($columns);
+                /*$arrayKeys = array_keys($columns);
                 foreach ($columns as $singlecolum => $singleValue) {
                     $sql .= $singlecolum . " = :" . $singlecolum;
                     if ($singlecolum != end($arrayKeys)) {
                         $sql .= ", ";
                     }
-                }
+                }*/
                 if (!empty($extraOptions)) {
-                    $sql .= "WHERE ";
-                    $sql .= $option . ":{$option}";
+                    $sql .= " WHERE ";
+                    $arrayKeys = array_keys($extraOptions);
+                    foreach ($extraOptions as $option => $value) {
+                        if ($option != end($arrayKeys)) {
+                            $sql .= $option . " = :{$option} AND ";
+                        } else {
+                            $sql .= $option . " = :{$option}";
+                        }
+
+                    }
                 }
                 break;
 
@@ -104,6 +120,10 @@ class dbExec extends dbConn
                 $stmt->bindParam(":" . $singleColumn, $extraOptions[$singleColumn]);
             }
         }
+
+
+
+
 
         $stmt->execute();
         $this->results = $stmt->fetchAll(PDO::FETCH_ASSOC);
