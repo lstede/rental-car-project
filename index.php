@@ -36,7 +36,7 @@ include_once ('functions/functions.php');
 </head>
 
 <body>
-
+<!--- pre-loader uitgezet omdat hij niet werkt :D
     <div class="pre-loader">
         <div class="load-con">
             <img src="img/eco/logo.png" class="animated fadeInDown" alt="">
@@ -47,7 +47,7 @@ include_once ('functions/functions.php');
             </div>
         </div>
     </div>
-   
+   !--->
     <header>
 <?php menu(); ?>
 
