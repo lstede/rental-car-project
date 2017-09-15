@@ -32,7 +32,7 @@ class dbExec extends dbConn
                 }*/
 
                 if (!empty($extraOptions)) {
-                    $sql .= "WHERE ";
+                    $sql .= " WHERE ";
                     $arrayKeys = array_keys($extraOptions);
                     foreach ($extraOptions as $option => $value) {
                         if ($option != end($arrayKeys)) {
@@ -73,21 +73,20 @@ class dbExec extends dbConn
                 }
                 break;
 
-            case('delete'):
-                $sql = "DELETE FROM {$table}";
-                $arrayKeys = array_keys($columns);
-                foreach ($columns as $singlecolum => $singleValue) {
-                    $sql .= $singlecolum . " = :" . $singlecolum;
-                    if ($singlecolum != end($arrayKeys)) {
-                        $sql .= ", ";
-                    }
-                }
-                if (!empty($extraOptions)) {
-                    $sql .= "WHERE ";
-                    $sql .= $option . ":{$option}";
-                }
-                break;
-
+	        case('delete'):
+		        $sql = "DELETE FROM {$table}";
+		        $arrayKeys = array_keys($columns);
+		        foreach ($columns as $singlecolum => $singleValue) {
+			        $sql .= $singlecolum . " = :" . $singlecolum;
+			        if ($singlecolum != end($arrayKeys)) {
+				        $sql .= ", ";
+			        }
+		        }
+		        if (!empty($extraOptions)) {
+			        $sql .= "WHERE ";
+			        $sql .= $option . ":{$option}";
+		        }
+		        break;
         }
 
 

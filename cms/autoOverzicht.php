@@ -10,6 +10,7 @@ require('upload.php');
 headerHtml();
 
 $car = new user();
+$user = new user();
 $user->checkLogin('cms');
 
 
