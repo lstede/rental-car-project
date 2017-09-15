@@ -7,3 +7,4 @@ js/rs-plugin/.DS_Store
 js/rs-plugin/css/.DS_Store
 js/rs-plugin/js/.DS_Store
 node_modules/
+/css/main.css
