@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('../functions/functionsCMS.php');
+include_once('../classes/fresh/cars.php');
 include_once('../classes/fresh/user.php');
 require_once('auto-toevoegen.php');
 require('upload.php');
@@ -8,6 +9,7 @@ require('upload.php');
 
 headerHtml();
 
+$car = new user();
 $user = new user();
 $user->checkLogin('cms');
 
@@ -48,7 +50,7 @@ $user->checkLogin('cms');
 			            'carLicencePlate' => $_POST['txt_carPlate']);
 
 
-		            $user->addUser($table,$columns);
+		            $car->addCar($table,$columns);
 
 
 
