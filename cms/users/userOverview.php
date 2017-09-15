@@ -148,6 +148,8 @@ if (isset($_GET['edit'])) {
         $dataUser = $user->getUser($_GET['edit'])[0];
     }
 
+
+
     if ($dataUser) {
         $idValid = true;
         $_POST['nameRegister'] = $dataUser['userFirstName'];

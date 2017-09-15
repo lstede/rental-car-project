@@ -21,16 +21,6 @@ class dbExec extends dbConn
             case ('select'):
                 $sql = "SELECT * FROM {$table} ";
 
-                /*if (!empty($columns)) {
-                    $arrayKeys = array_keys($columns);
-                    foreach ($columns as $value) {
-                        $sql .= $value;
-                        if ($value != end($arrayKeys)) {
-                            $sql .= ", ";
-                        }
-                    }
-                }*/
-
                 if (!empty($extraOptions)) {
                     $sql .= "WHERE ";
                     $arrayKeys = array_keys($extraOptions);
@@ -43,6 +33,32 @@ class dbExec extends dbConn
 
                     }
                 }
+
+                break;
+
+            case('selectJoin'):
+
+                $sql = "SELECT ";
+
+                if (!empty($columns)) {
+                    $arrayKeys = array_keys($columns);
+                    foreach ($columns as $value) {
+                        $sql .= $value;
+                        if ($value != end($arrayKeys)) {
+                            $sql .= ", ";
+                        }
+                    }
+                }
+
+                $sql.= "FROM {$table} ";
+              
+                foreach ($extraOptions as $extraTable => $extraValues) {
+                    $sql.= "JOIN $extraTable";
+                    foreach ($extraValues as $singleValue => $singleTarget) {
+                        $sql.= "ON {$singleValue} = {$singleTarget} ";
+                    }
+                }
+
                 break;
 
             case('insert'):
@@ -120,9 +136,6 @@ class dbExec extends dbConn
                 $stmt->bindParam(":" . $singleColumn, $extraOptions[$singleColumn]);
             }
         }
-
-
-
 
 
         $stmt->execute();
