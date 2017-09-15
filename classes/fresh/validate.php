@@ -74,8 +74,4 @@ class validate
         return $this->succes;
     }
 
-    public function returnErrors() {
-        return $this->errors;
-    }
-
 }
