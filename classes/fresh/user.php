@@ -6,24 +6,31 @@ class user extends dbExec
 
     public $errors = array();
 
-    public function login($username, $password)
-    {
-        $extraOptions = array("username" => $username);
-        $this->query('select','users', '', $extraOptions);
+    public function login($username, $password) {
+	    $extraOptions = array( "username" => $username );
 
-        if ($this->countResults < 1) {
-            $this->errors[] = 'Gebruikersnaam bestaat niet';
-        }
+	    $this->query( 'select', 'users', '', $extraOptions );
+
+	    if ( $this->countResults < 1 ) {
+		    $this->errors[] = 'Gebruikersnaam bestaat niet';
+	    } elseif ( $this->results[0]['userPassword'] == $this->md5( $password ) ) {
+
+		    $this->query( 'select', 'users', '', $extraOptions );
+
+		    if ( $this->countResults < 1 ) {
+			    $this->errors[] = 'Gebruikersnaam bestaat niet';
+		    }
 
 
-        if ($this->results[0]['userPassword'] == $this->md5($password)) {
-            $_SESSION['logged'] = true;
-            $_SESSION['rights'] = $this->results[0]['userAdmin'];
-            ?>
-            <meta http-equiv="refresh" content="0;url=cms/index.php"> <?php
-        } else {
-            $this->errors[] = 'Wachtwoord is onjuist';
-        }
+		    if ( $this->results[0]['userPassword'] == $this->md5( $password ) ) {
+			    $_SESSION['logged'] = true;
+			    $_SESSION['rights'] = $this->results[0]['userAdmin'];
+			    ?>
+                <meta http-equiv="refresh" content="0;url=cms/index.php"> <?php
+		    } else {
+			    $this->errors[] = 'Wachtwoord is onjuist';
+		    }
+	    }
     }
 
     public function md5($password)
@@ -44,6 +51,7 @@ class user extends dbExec
         }
 
         else if (!$_SESSION['logged'] && $page == 'cms') {
+
             header("location:../login.php");
             echo 2;
             die;
@@ -52,13 +60,34 @@ class user extends dbExec
 
     }
 
-    public function addUser($table,$columns) {
-        $this->query('insert',$table,$columns);
+
+    public function addUser($table, $columns)
+    {
+        $this->query('insert', $table, $columns);
     }
 
-    public function getAllUsers($table) {
-        $this->query('select',$table);
+    public function editUser($table, $columns = null, $extraOptions = null)
+    {
+        $this->query("update", $table, $columns, $extraOptions);
+    }
+
+    public function getUser($userId)
+    {
+        $extraOptions = array("userId" => $userId);
+        $this->query('select', 'users', '', $extraOptions);
         return $this->results;
     }
+
+    public function getAllUsers()
+    {
+        $this->query('select', 'users');
+        return $this->results;
+    }
+
+    public function deleteUser($extraOptions) {
+        $this->query('delete','users',null,$extraOptions);
+    }
+
+
 
 }

@@ -3,14 +3,16 @@ session_start();
 require_once( '../functions/functionsCMS.php' );
 include_once( '../classes/fresh/cars.php' );
 include_once( '../classes/fresh/user.php' );
+include_once('../classes/fresh/input.php');
 require_once( 'auto-toevoegen.php' );
 
 
 headerHtml();
 $car = new cars();
+
 $user = new user();
 $user->checkLogin( 'cms' );
-$table = 'carstatus';
+
 
 
 $idValid = false;
@@ -22,9 +24,39 @@ if ( isset( $_POST['status-toevoegen'] ) ) {
 	$columns = array(
 		'carStatusName' => $_POST['txt_status']
 	);
-	$car->addCar( $table, $columns );
+	$car->addCar($columns);
 
 }
+
+if ( isset( $_POST['status-bijwerken'] ) ) {
+
+	$columns = array(
+		'carStatusName' => $_POST['txt_status']
+	);
+
+	$extraOptions = array("carStatusId" => $_GET['edit']);
+
+	$car->editStatus($columns,$extraOptions);
+
+
+
+
+}
+
+if (isset($_GET['edit'])) {
+	$dataUser = null;
+	if ($car->getCar($_GET['edit'])) {
+		$dataUser = $car->getCar($_GET['edit'])[0];
+	}
+
+	if ($dataUser) {
+		$idValid = true;
+		$_POST['txt_status'] = $dataUser['carStatusName'];
+
+	}
+}
+
+
 if (isset($_GET['delete'])) {
 	if ( $car->getCar( $_GET['delete'] ) ) {
 		$idValidDelete = true;
@@ -132,17 +164,17 @@ if (isset($_GET['delete'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Gebruiker verwijderen</h4>
+                <h4 class="modal-title">Status verwijderen</h4>
             </div>
             <div class="modal-body">
-                <p>Weet u zeker dat u de gebruiker wilt verwijderen?</p>
+                <p>Weet u zeker dat u de Status wilt verwijderen?</p>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <form method="post">
-                                <input type="submit" name="delete-submit" id="register-submit"
+                                <input type="submit" name="delete-submit" id="delete-submit"
                                        tabindex="4" class="form-control  btn-default btn"
-                                       value="Gebruiker verwijderen">
+                                       value="Status verwijderen">
                             </form>
                         </div>
                     </div>
@@ -160,20 +192,74 @@ if (isset($_GET['delete'])) {
 
 </body>
 </html>
+
+<div class="modal fade" id="bewerkStatusModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button
+            </div>
+
+            <h4 class="modal-title">Status toevoegen</h4>
+            <div class="modal-body">
+                <form class="form" role="form" method="POST" title="signin">
+
+                    <div class="form-group">
+                        <label for="usr">Type:</label>
+                        <input type="text" class="form-control" value="<?php echo input::get('carStatusName'); ?>" name="txt_status" title="signin">
+                    </div>
+                    <div>
+                    </div>
+                    <a class="btn btn-default" data-dismiss="modal">Annuleren</a>
+                    <input type="submit" class="btn btn-primary" name="status-bijwerken" value="Toevoegen"/>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <?php
 
 footer();
 
+if(isset($_POST['status-bijwerken']) && $updated === false) {
+	?>
+    <script>
+        $('#bewerkStatusModal').modal('show');
+    </script>
+	<?php
+}
+
+if ($idValid && $updated === false) {
+	?>
+    <script>
+        $('#bewerkStatusModal').modal('show');
+
+
+        $("#status-bijwerken").attr('name', 'update');
+        $("#status-bijwerken").attr('value', 'Bijwerken');
+
+        $('#bewerkStatusModal').on('hidden.bs.modal', function (e) {
+            window.history.pushState({}, "Hide", "carStatus.php");
+        })
+    </script>;
+	<?php
+}
 
 
 if ($idValidDelete && $updated === false) {
 	?>
     <script>
         $('#deleteModal').modal('show');
-        $('#deleteModal').on('hidden.bs.modal', function (e) {
+        $('#deleteModal').on('hidden.bs.modal', function(e) {
             window.history.pushState({}, "Hide", "carStatus.php");
         })
     </script> <?php
+
 }
 
 ?>

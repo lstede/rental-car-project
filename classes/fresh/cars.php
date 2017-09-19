@@ -5,8 +5,8 @@ class cars extends dbExec
 
 {
 
-	public function addCar($table,$columns) {
-		$this->query('insert',$table,$columns);
+	public function addCar($columns) {
+		$this->query('insert','carstatus',$columns);
 	}
 
 	public function getAllCars($table) {
@@ -14,9 +14,9 @@ class cars extends dbExec
 		return $this->results;
 	}
 
-	public function editStatus($table, $columns = null, $extraOptions = null)
+	public function editStatus($columns = null, $extraOptions = null)
 	{
-		$this->query("update", $table, $columns, $extraOptions);
+		$this->query("update", 'carstatus', $columns, $extraOptions);
 	}
 
 
