@@ -167,9 +167,8 @@ if (isset($_GET['delete'])) {
 
     if (isset($_POST['delete-submit']) && $idValidDelete) {
         $extraOptions = array('userId' => $_GET['delete']);
-        if($user->deleteUser($extraOptions)){
-            $updated = true;
-        }
+        $updated = true;
+        $user->deleteUser($extraOptions);
     }
 }
 

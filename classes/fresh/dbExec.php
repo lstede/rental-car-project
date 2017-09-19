@@ -51,7 +51,8 @@ class dbExec extends dbConn
                 }
 
                 $sql.= "FROM {$table} ";
-              
+                $test = array('carbrands' => array('cars.carBrand' => 'carbrands.carBrandsId'),
+                    'carcolor'=>array_keys());
                 foreach ($extraOptions as $extraTable => $extraValues) {
                     $sql.= "JOIN $extraTable";
                     foreach ($extraValues as $singleValue => $singleTarget) {
