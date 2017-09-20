@@ -41,7 +41,8 @@ class dbExec extends dbConn
                 $sql = "SELECT ";
 
                 if (!empty($columns)) {
-                    $arrayKeys = array_keys($columns);
+                    $arrayKeys = array_values($columns);
+
                     foreach ($columns as $value) {
                         $sql .= $value;
                         if ($value != end($arrayKeys)) {
@@ -50,16 +51,14 @@ class dbExec extends dbConn
                     }
                 }
 
-                $sql.= "FROM {$table} ";
-                $test = array('carbrands' => array('cars.carBrand' => 'carbrands.carBrandsId'),
-                    'carcolor'=>array_keys());
+                $sql.= " FROM {$table} ";
+
                 foreach ($extraOptions as $extraTable => $extraValues) {
                     $sql.= "JOIN $extraTable";
                     foreach ($extraValues as $singleValue => $singleTarget) {
-                        $sql.= "ON {$singleValue} = {$singleTarget} ";
+                        $sql.= " ON {$singleValue} = {$singleTarget} ";
                     }
                 }
-
                 break;
 
             case('insert'):
@@ -126,13 +125,13 @@ class dbExec extends dbConn
 
         $stmt = $this->conn->prepare($sql);
 
-        if (!empty($columns)) {
+        if (!empty($columns) && $option != 'selectJoin') {
             foreach ($columns as $singleColum => $singleValue) {
                 $stmt->bindParam($singleColum, $columns[$singleColum]);
             }
         }
 
-        if (!empty($extraOptions)) {
+        if (!empty($extraOptions) && $option != 'selectJoin') {
             foreach ($extraOptions as $singleColumn => $value) {
                 $stmt->bindParam(":" . $singleColumn, $extraOptions[$singleColumn]);
             }
