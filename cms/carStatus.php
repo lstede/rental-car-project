@@ -4,30 +4,60 @@ require_once( '../functions/functionsCMS.php' );
 include_once( '../classes/fresh/cars.php' );
 include_once( '../classes/fresh/user.php' );
 include_once('../classes/fresh/input.php');
+include_once('../classes/fresh/validate.php');
 require_once( 'auto-toevoegen.php' );
-
+$table = 'carstatus';
 
 headerHtml();
 $car = new cars();
 
-
-$user = new user();
-$user->checkLogin( 'cms' );
-
-
-
 $idValid = false;
 $idValidDelete = false;
 $updated = false;
+
+
+$user = new user();
+$user->checkLogin( 'cms' );
+$validateRegister = new validate();
 
 if ( isset( $_POST['status-toevoegen'] ) ) {
 
 	$columns = array(
 		'carStatusName' => $_POST['txt_status']
 	);
-	$car->addCar($columns);
+	$car->addCar($table,$columns);
 
 }
+
+
+$carId = input::get('edit');
+
+if (isset($_POST['status-bijwerken'])) {
+	$data = array(
+		'statusName' => array(
+			'required' => true,
+			'min' => '1',
+			'max' => '15'
+		));
+
+
+	if ($validateRegister->validateInfo($data)) {
+
+
+
+		$columns = array(
+			'carStatusName' => input::get('statusName'));
+
+		$extraOptions = array("carStatusId" => $_GET['edit']);
+
+		$car->editCar($table, $columns, $extraOptions);
+
+		$updated = true;
+
+
+	}
+}
+
 
 if ( isset( $_POST['status-bijwerken'] ) ) {
 
@@ -37,17 +67,21 @@ if ( isset( $_POST['status-bijwerken'] ) ) {
 
 	$extraOptions = array("carStatusId" => $_GET['edit']);
 
-	$car->editStatus($columns,$extraOptions);
-
+	$car->editCar($table,$columns,$extraOptions);
+	$updated = true;
 
 
 
 }
 
+
+
+
 if (isset($_GET['edit'])) {
 	$dataUser = null;
-	if ($car->getCar($_GET['edit'])) {
-		$dataUser = $car->getCar($_GET['edit'])[0];
+	if ($car->getCar($table,$_GET['edit'])) {
+
+		$dataUser = $car->getCar($table,$_GET['edit'])[0];
 	}
 
 	if ($dataUser) {
@@ -59,14 +93,15 @@ if (isset($_GET['edit'])) {
 
 
 if (isset($_GET['delete'])) {
-	if ( $car->getCar( $_GET['delete'] ) ) {
+	if ( $car->getCar($table, $_GET['delete'] ) ) {
 		$idValidDelete = true;
 	}
 	if ( isset( $_POST['delete-submit'] ) && $idValidDelete ) {
 		$extraOptions = array( 'carStatusId' => $_GET['delete'] );
-		if ( $car->deleteCarStatus($extraOptions ) ) {
-			$updated = true;
-		}
+		$updated = true;
+		$car->deleteCar($table,$extraOptions );
+
+
 	}
 }
 
@@ -173,7 +208,7 @@ if (isset($_GET['delete'])) {
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <form method="post">
-                                <input type="submit" name="delete-submit" id="delete-submit"
+                                <input type="submit" name="delete-submit" id="status-bijwerken"
                                        tabindex="4" class="form-control  btn-default btn"
                                        value="Status verwijderen">
                             </form>
@@ -207,8 +242,9 @@ if (isset($_GET['delete'])) {
                 <form class="form" role="form" method="POST" title="signin">
 
                     <div class="form-group">
-                        <label for="usr">Type:</label>
-                        <input type="text" class="form-control" value="<?php echo input::get('carStatusName'); ?>" name="txt_status" title="signin">
+                        <label for="usr">Type:</label> <span
+                                style="color: red;"><?php echo $validateRegister->showErrors('statusName') ?></span>
+                        <input type="text"  class="form-control" value="<?php echo input::get('statusName'); ?>" name="txt_status" title="signin">
                     </div>
                     <div>
                     </div>
@@ -245,7 +281,7 @@ if ($idValid && $updated === false) {
         $("#status-bijwerken").attr('value', 'Bijwerken');
 
         $('#bewerkStatusModal').on('hidden.bs.modal', function (e) {
-            window.history.pushState({}, "Hide", "carStatus.php");
+            window.history.pushState({}, "Hide", "carstatus.php");
         })
     </script>;
 	<?php
@@ -257,7 +293,7 @@ if ($idValidDelete && $updated === false) {
     <script>
         $('#deleteModal').modal('show');
         $('#deleteModal').on('hidden.bs.modal', function(e) {
-            window.history.pushState({}, "Hide", "carStatus.php");
+            window.history.pushState({}, "Hide", "carstatus.php");
         })
     </script> <?php
 

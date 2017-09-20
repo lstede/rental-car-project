@@ -69,7 +69,7 @@ function statusToevoegen() {
 
                         <div class="form-group">
                             <label for="usr">Type:</label>
-                            <input type="text" class="form-control" name="txt_status" title="signin">
+                            <input type="text" class="form-control" name="txt_status" title="signin" required>
                         </div>
                         <div>
                         </div>

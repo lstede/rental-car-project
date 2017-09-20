@@ -118,9 +118,9 @@ function sidemenu()
                                 <ul class="nav navbar-nav">
                                     <li><a href="../cms/autoOverzicht.php">Auto's</a></li>
                                     <li><a href="../cms/carStatus.php">Status</a></li>
-                                    <li><a href="#">Kleur</a></li>
-                                    <li><a href="#">Type</a></li>
-                                    <li><a href="#">Merken</a></li>
+                                    <li><a href="../cms/carColor.php">Kleur</a></li>
+                                    <li><a href="../cms/autoType.php">Type</a></li>
+                                    <li><a href="../cms/carBrands.php">Merken</a></li>
                                 </ul>
                             </div>
                         </div>

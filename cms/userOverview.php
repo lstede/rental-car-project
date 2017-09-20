@@ -1,103 +1,198 @@
 <?php
 session_start();
-include_once( '../functions/functionsCMS.php' );
-include_once( '../classes/fresh/user.php' );
-include_once( '../classes/fresh/input.php' );
-include_once( '../classes/fresh/validate.php' );
+include_once('../functions/functionsCMS.php');
+include_once('../classes/fresh/user.php');
+include_once('../classes/fresh/input.php');
+include_once('../classes/fresh/validate.php');
 headerHtml();
 
+
+$idValid = false;
+$idValidDelete = false;
+$updated = false;
 
 $user = new user();
 $user->checkLogin('cms');
 $validateRegister = new validate();
 
-/*$columns = array(
-    'userPhoneNumber' => 1,
-    'userEmail' => "test",
-    'userFirstName' => "test",
-    'userLastName'=> "test",
-    'userName' => "test",
-    'userPassword' => "test",
-    'userAdmin' => 1);
-
-$user->query("update","users", $columns);*/
 
 if (isset($_POST['register-submit'])) {
 
 
-    $data = array(
-        'usernameRegister' => array(
-            'required' => true,
-            'min' => '4',
-            'max' => '15'
-        ),
-        'phoneRegister' => array(
-            'required' => true,
-            'min' => '10',
-            'max' => '10'
-        ),
-        'emailRegister' => array(
-            'required' => true,
-            'min' => '5',
-            'max' => '254'
-        ),
-        'nameRegister' => array(
-            'required' => true,
-            'min' => '2',
-            'max' => '35'
-        ),
-        'surnameRegister' => array(
-            'required' => true,
-            'min' => '2',
-            'max' => '35'
-        ),
-        'passwordRegister' => array(
-            'required' => true,
-            'min' => '8',
-            'max' => '32',
-        ),
-        'confirm-passwordRegister' => array(
-            'required' => true,
-            'match' => 'passwordRegister'
-        ));
+	$data = array(
+		'usernameRegister' => array(
+			'required' => true,
+			'min' => '4',
+			'max' => '15'
+		),
+		'phoneRegister' => array(
+			'required' => true,
+			'min' => '10',
+			'max' => '10'
+		),
+		'emailRegister' => array(
+			'required' => true,
+			'min' => '5',
+			'max' => '254'
+		),
+		'nameRegister' => array(
+			'required' => true,
+			'min' => '2',
+			'max' => '35'
+		),
+		'surnameRegister' => array(
+			'required' => true,
+			'min' => '2',
+			'max' => '35'
+		),
+		'passwordRegister' => array(
+			'required' => true,
+			'min' => '8',
+			'max' => '32',
+		),
+		'confirm-passwordRegister' => array(
+			'required' => true,
+			'match' => 'passwordRegister'
+		));
 
 
-    if ($validateRegister->validateInfo($data)) {
+	if ($validateRegister->validateInfo($data)) {
 
-        $hashPassword = $user->md5(input::get('passwordRegister'));
-        $rights = (input::get('rightsRegister') == "admin") ? 1 : 0;
+		$hashPassword = $user->md5(input::get('passwordRegister'));
+		$rights = (input::get('rightsRegister') == "admin") ? 1 : 0;
 
-        $columns = array(
-            'userPhoneNumber' => input::get('phoneRegister'),
-            'userEmail' => input::get('emailRegister'),
-            'userFirstName' => input::get('nameRegister'),
-            'userLastName'=> input::get('surnameRegister'),
-            'userName' => input::get('usernameRegister'),
-            'userPassword' => $hashPassword,
-            'userAdmin' => $rights);
+		$columns = array(
+			'userPhoneNumber' => input::get('phoneRegister'),
+			'userEmail' => input::get('emailRegister'),
+			'userFirstName' => input::get('nameRegister'),
+			'userLastName' => input::get('surnameRegister'),
+			'userName' => input::get('usernameRegister'),
+			'userPassword' => $hashPassword,
+			'userAdmin' => $rights);
 
-        $user->addUser('users',$columns);
-        $_POST = array();
-    }
+		if($user->addUser('users', $columns)) {
+			$updated = true;
+		}
+		$_POST = array();
+	}
 
 
+}
+$userId = input::get('edit');
+
+if (isset($_POST['update'])) {
+	$data = array(
+		'usernameRegister' => array(
+			'required' => true,
+			'min' => '4',
+			'max' => '15'
+		),
+		'phoneRegister' => array(
+			'required' => true,
+			'min' => '10',
+			'max' => '10'
+		),
+		'emailRegister' => array(
+			'required' => true,
+			'min' => '5',
+			'max' => '254'
+		),
+		'nameRegister' => array(
+			'required' => true,
+			'min' => '2',
+			'max' => '35'
+		),
+		'surnameRegister' => array(
+			'required' => true,
+			'min' => '2',
+			'max' => '35'
+		),
+		'passwordRegister' => array(
+			'required' => true,
+			'min' => '8',
+			'max' => '32',
+		),
+		'confirm-passwordRegister' => array(
+			'required' => true,
+			'match' => 'passwordRegister'
+		));
+
+
+	if ($validateRegister->validateInfo($data)) {
+
+		$hashPassword = $user->md5(input::get('passwordRegister'));
+		$rights = (input::get('rightsRegister') == "admin") ? 1 : 0;
+
+		$columns = array(
+			'userPhoneNumber' => input::get('phoneRegister'),
+			'userEmail' => input::get('emailRegister'),
+			'userFirstName' => input::get('nameRegister'),
+			'userLastName' => input::get('surnameRegister'),
+			'userName' => input::get('usernameRegister'),
+			'userPassword' => $hashPassword,
+			'userAdmin' => $rights);
+
+		$extraOptions = array("userId" => $_GET['edit']);
+
+		$user->editUser("users", $columns, $extraOptions);
+
+		$updated = true;
+
+
+	}
+}
+
+if (isset($_GET['edit'])) {
+	$dataUser = null;
+	if ($user->getUser($_GET['edit'])) {
+		$dataUser = $user->getUser($_GET['edit'])[0];
+	}
+
+	if ($dataUser) {
+		$idValid = true;
+		$_POST['nameRegister'] = $dataUser['userFirstName'];
+		$_POST['surnameRegister'] = $dataUser['userLastName'];
+		$_POST['emailRegister'] = $dataUser['userEmail'];
+		$_POST['phoneRegister'] = $dataUser['userPhoneNumber'];
+		$_POST['usernameRegister'] = $dataUser['userName'];
+		$_POST['passwordRegister'] = "";
+		$_POST['confirm-passwordRegister'] = "";
+	}
+}
+
+if (isset($_GET['delete'])) {
+	if ($user->getUser($_GET['delete'])) {
+		$idValidDelete = true;
+	}
+
+	if (isset($_POST['delete-submit']) && $idValidDelete) {
+		$extraOptions = array('userId' => $_GET['delete']);
+		$updated = true;
+		$user->deleteUser($extraOptions);
+	}
 }
 
 
 ?>
     <div class="row">
+
+
+
         <!-- uncomment code for absolute positioning tweek see top comment in css -->
         <!-- <div class="absolute-wrapper"> </div> -->
         <!-- Menu -->
-        <?php
-        sidemenu();
-        ?>
+        <div class="side-menu">
+
+			<?php sidemenu(); ?>
+
+        </div>
 
         <!-- Main Content -->
         <div class="container-fluid">
             <div class="side-body">
                 <h1> Alle gebruikers </h1>
-                <button type="button" class="btn btn-outline-dark glyphicon glyphicon-plus" data-toggle="modal" data-target="#addUserModal"></button>
+                <button type="button" class="btn btn-outline-dark glyphicon glyphicon-plus" data-toggle="modal"
+                        data-target="#addUserModal"></button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -110,41 +205,50 @@ if (isset($_POST['register-submit'])) {
                             <th>Telefoonnummer</th>
                             <th>Wachtwoord</th>
                             <th>Rechten</th>
+                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <tr>
-                            <?php
-                            //print_r($user->results);
-                            //print_r($user->results);
-                            $count = 1;
-                            $table = 'users';
-                            foreach ($user->getAllUsers($table) as $singleRowData) {
-                                echo "<tr>";
-                                foreach ($singleRowData as $singleRow => $singleData) {
-                                    echo "<td>";
-                                    if ($singleRow == 'userPassword') {
-                                        echo "******";
+							<?php
+							//print_r($user->results);
+							//print_r($user->results);
+							$count = 1;
 
-                                    } elseif ($singleRow == 'userAdmin') {
-                                        if ($singleData == 1) {
-                                            echo "Beheerder";
-                                        } else {
-                                            echo "Gebruiker";
-                                        }
-                                    } elseif ($singleRow == "userId") {
-                                        echo $count;
-                                    } else {
-                                        echo $singleData;
-                                    }
-                                    echo "</td>";
+							foreach ($user->getAllUsers() as $singleRowData) {
+								echo "<tr>";
+								foreach ($singleRowData as $singleRow => $singleData) {
+									echo "<td>";
+									if ($singleRow == 'userPassword') {
+										echo "******";
 
-                                }
-                                echo "</tr>";
-                                $count++;
-                            }
-                            ?>
+									} elseif ($singleRow == 'userAdmin') {
+										if ($singleData == 1) {
+											echo "Beheerder";
+										} else {
+											echo "Gebruiker";
+										}
+									} elseif ($singleRow == "userId") {
+										echo $count;
+									} else {
+										echo $singleData;
+									}
+
+									echo "</td>";
+								}
+								echo "<td>
+                                        <a class='' href='?edit=" . $singleRowData['userId'] . "'>
+                                            <button class='btn btn-default glyphicon glyphicon-pencil'></button>
+                                        </a>
+                                           <a class='' href='?delete=" . $singleRowData['userId'] . "'>
+                                            <button class='btn btn-default glyphicon glyphicon-trash'></button>
+                                        </a>
+                                     </td>";
+								echo "</tr>";
+								$count++;
+							}
+							?>
                         </tr>
 
                         </tbody>
@@ -174,7 +278,7 @@ if (isset($_POST['register-submit'])) {
                                     style="color: red;"><?php echo $validateRegister->showErrors('nameRegister') ?></span>
                             <input type="text" name="nameRegister" id="name" tabindex="1"
                                    class="form-control" placeholder="Voornaam" required
-                                   value="<?php  echo input::get('nameRegister'); ?>">
+                                   value="<?php echo input::get('nameRegister'); ?>">
                         </div>
                         <div class="form-group">
                             Achternaam: <span
@@ -221,7 +325,7 @@ if (isset($_POST['register-submit'])) {
 
                         <div class="form-group">
                             Rechten
-                            <select name="rightsRegister">
+                            <select id="rights" name="rightsRegister">
                                 <option value="user" id="">Gebruiker</option>
                                 <option value="admin" id="">Beheerder</option>
                             </select>
@@ -245,9 +349,73 @@ if (isset($_POST['register-submit'])) {
         </div>
     </div>
 
+    <!-- DELETE MODAL -->
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Gebruiker verwijderen</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Weet u zeker dat u de gebruiker wilt verwijderen?</p>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <form method="post">
+                                    <input type="submit" name="delete-submit" id="register-submit"
+                                           tabindex="4" class="form-control  btn-default btn"
+                                           value="Gebruiker verwijderen">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 <?php
 
 footer();
-if(isset($_GET['edit'])) {
-    ?>   <script>alert; $('#addUserModal').modal('show');</script> <?php
+
+if(isset($_POST['register-submit']) && $updated === false) {
+	?>
+    <script>
+        $('#addUserModal').modal('show');
+    </script>
+	<?php
+}
+
+if ($idValid && $updated === false) {
+	?>
+    <script>
+        $('#addUserModal').modal('show');
+
+        $('#rights').val(<?php echo($dataUser['userAdmin'] == 1 ? "'admin'" : "'user'"); ?>);
+
+        $("#register-submit").attr('name', 'update');
+        $("#register-submit").attr('value', 'Bijwerken');
+
+        $('#addUserModal').on('hidden.bs.modal', function (e) {
+            window.history.pushState({}, "Hide", "useroverview.php");
+        })
+    </script>;
+	<?php
+}
+
+if ($idValidDelete && $updated === false) {
+	?>
+    <script>
+        $('#deleteModal').modal('show');
+        $('#deleteModal').on('hidden.bs.modal', function (e) {
+            window.history.pushState({}, "Hide", "useroverview.php");
+        })
+    </script> <?php
 }
