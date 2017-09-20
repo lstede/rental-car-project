@@ -145,7 +145,7 @@ if (isset($_GET['delete'])) {
 						//print_r($user->results);
 						//print_r($user->results);
 						$count = 1;
-						foreach ( $car->getAllCars( $table ) as $singleRowData ) {
+						foreach ( $car->getCars( $table ) as $singleRowData ) {
 							echo "<tr>";
 							foreach ( $singleRowData as $singleRow => $singleData ) {
 
