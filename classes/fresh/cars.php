@@ -5,8 +5,8 @@ class cars extends dbExec
 
 {
 
-	public function addCar($columns) {
-		$this->query('insert','carstatus',$columns);
+	public function addCar($table, $columns) {
+		$this->query('insert',$table,$columns);
 	}
 
 	public function getAllCars($table) {
@@ -14,22 +14,42 @@ class cars extends dbExec
 		return $this->results;
 	}
 
-	public function editStatus($columns = null, $extraOptions = null)
+	public function editCar($table,$columns = null, $extraOptions = null)
 	{
-		$this->query("update", 'carstatus', $columns, $extraOptions);
+		$this->query("update", $table, $columns, $extraOptions);
 	}
 
 
-	public function getCar($carStatusId )
+	public function getCar($table, $carStatusId )
 	{
 		$extraOptions = array("carStatusId" => $carStatusId);
-		$this->query('select', 'carstatus' , '', $extraOptions);
+		$this->query('select', $table , '', $extraOptions);
 		return $this->results;
 	}
 
+	public function getCarz($table, $carStatusId )
+	{
+		$extraOptions = array("carColorId" => $carStatusId);
+		$this->query('select', $table , '', $extraOptions);
+		return $this->results;
+	}
 
-	public function deleteCarStatus($extraOptions) {
-		$this->query('delete', 'carstatus', null, $extraOptions);
+	public function getCarTypes($table, $carStatusId )
+	{
+		$extraOptions = array("carTypesid" => $carStatusId);
+		$this->query('select', $table , '', $extraOptions);
+		return $this->results;
+	}
+
+	public function getCarBrands($table, $carStatusId )
+	{
+		$extraOptions = array("carBrandsId" => $carStatusId);
+		$this->query('select', $table , '', $extraOptions);
+		return $this->results;
+	}
+
+	public function deleteCar($table, $extraOptions) {
+		$this->query('delete', $table, null, $extraOptions);
 	}
 
 }
