@@ -13,6 +13,7 @@ class cars extends dbExec
 		$this->query('select',$table);
 		return $this->results;
 	}
+	
 
 	public function editStatus($table, $columns = null, $extraOptions = null)
 	{
